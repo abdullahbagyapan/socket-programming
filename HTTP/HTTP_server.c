@@ -25,9 +25,11 @@ int main() {
     char response_body[1024]; // HTTP response body
     char response_header[2048] = "HTTP/1.1 200 OK\r\n\n"; // set response header (HTTP status - 200 OK)
 
-    //TODO: fgets() reads only one line at once
-    fgets(response_body, sizeof(response_body), HTML_data_fp); // embed the HTML_Data into HTTP response body
-    
+    // embed the HTML_Data into HTTP response body
+    // fixes: reading only one line at once problem
+    int bytes_read = fread(response_body, 1, sizeof(response_body), HTML_data_fp);
+    response_body[bytes_read] = '\0'; // // null-terminate the string
+
     strcat(response_header, response_body); // concat both response (header and body) into only one response
 
 
