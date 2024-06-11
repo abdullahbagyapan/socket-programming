@@ -90,5 +90,7 @@ int main() {
 
     };
 
+    free(HTML_data_fp); // free file pointer, to be good citizien
+
     return 0; // Ok
 }
